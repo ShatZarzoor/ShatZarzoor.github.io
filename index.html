@@ -2,23 +2,23 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>شات زرزور - غرف دردشة عامة وسرّية عربية</title>
+  <title>شات زرزور - شات عام، شات بنات، شات تعارف</title>
 
   <!-- SEO أساسي -->
   <meta name="description"
-        content="شات زرزور هو موقع دردشة عربي بسيط يوفر غرف عامة وسرّية برمز، مع حذف تلقائي للرسائل والصور بعد 22 دقيقة.">
+        content="شات زرزور يوفر شات عام، شات بنات محترم، وشات تعارف عربي، مع إمكانية إنشاء غرف خاصة وإرسال الصور وحذف تلقائي للرسائل بعد فترة.">
   <meta name="keywords"
-        content="شات زرزور, دردشة عربية, غرف دردشة, شات سري, شات بدون تسجيل, شات زرزور اونلاين">
+        content="شات زرزور, شات عام, شات بنات, شات تعارف, دردشة عربية, شات بدون تسجيل">
   <meta name="robots" content="index,follow">
 
-  <!-- مهم لرفع الفهرسة على GitHub Pages (عدّل لو اسمك غير) -->
+  <!-- canonical (عدّلها إذا تغير الدومين) -->
   <link rel="canonical" href="https://shatzarzoor.github.io/">
 
-  <!-- سوشال (Open Graph) -->
+  <!-- Open Graph للسوشال -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="شات زرزور - غرف دردشة عامة وسرّية">
+  <meta property="og:title" content="شات زرزور - شات عام، شات بنات، شات تعارف وغرف خاصة">
   <meta property="og:description"
-        content="ادخل شات زرزور، أنشئ غرفتك السرّية برمز خاص، وشارك الأصدقاء في غرف تنحذف رسائلها تلقائياً بعد 22 دقيقة.">
+        content="ادخل شات زرزور، واختر بين الشات العام، شات بنات المحترم، شات تعارف، أو أنشئ غرفتك الخاصة برمز.">
   <meta property="og:url" content="https://shatzarzoor.github.io/">
   <meta property="og:locale" content="ar_AR">
 
@@ -72,6 +72,12 @@
       opacity: 0.85;
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .support-btn {
       display: inline-flex;
       align-items: center;
@@ -91,47 +97,36 @@
       opacity: 0.9;
     }
 
-    /* شريط الغرف */
-    .rooms-bar {
+    .lock-btn {
+      background: rgba(0,0,0,0.15);
+      border: none;
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 0.95rem;
+    }
+    .lock-btn:hover {
+      background: rgba(0,0,0,0.3);
+    }
+
+    /* تبويبات الغرف الثابتة */
+    .rooms-tabs {
       background: #f0f2f5;
       padding: 6px 8px;
       border-bottom: 1px solid #d0d7dc;
       display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .rooms-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-    .current-room-label {
-      font-size: 0.8rem;
-      color: #54656f;
-    }
-    .create-room-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.75rem;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: none;
-      background: #008069;
-      color: #fff;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .rooms-list {
-      display: flex;
       gap: 6px;
       overflow-x: auto;
     }
-    .room-pill {
+    .room-tab {
       padding: 4px 10px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       border: 1px solid #c4ccd2;
       background: #ffffff;
       color: #111b21;
@@ -139,19 +134,23 @@
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
     }
-    .room-pill i {
-      font-size: 0.7rem;
+    .room-tab i {
+      font-size: 0.75rem;
     }
-    .room-pill.active {
+    .room-tab.active {
       background: #008069;
       color: #ffffff;
       border-color: #008069;
     }
-    .room-pill.expired {
-      opacity: 0.4;
-      cursor: not-allowed;
+
+    .current-room-label {
+      font-size: 0.8rem;
+      color: #54656f;
+      padding: 4px 10px;
+      background: #f5f7f8;
+      border-bottom: 1px solid #e0e5ea;
     }
 
     /* الرسائل */
@@ -267,18 +266,41 @@
     .modal-box select {
       width: 90%;
       border: 1px solid #ccc;
-      margin: 8px 0;
+      margin: 6px 0;
       padding: 8px;
       border-radius: 5px;
+      font-size: 0.85rem;
     }
     .modal-box button {
       background: #008069;
       color: white;
-      padding: 9px 16px;
+      padding: 8px 16px;
       border-radius: 5px;
       width: 100%;
       border: none;
       cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .modal-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+      justify-content: center;
+    }
+    .modal-tab-btn {
+      flex: 1;
+      padding: 5px 0;
+      border-radius: 999px;
+      border: 1px solid #ccc;
+      background: #f9fafb;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .modal-tab-btn.active {
+      background: #008069;
+      color: #fff;
+      border-color: #008069;
     }
 
     .footer-note {
@@ -287,6 +309,11 @@
       padding: 4px 8px 6px;
       background: #f8fafb;
       border-top: 1px solid #e0e5ea;
+    }
+    .footer-note a {
+      color:#008069;
+      text-decoration:none;
+      font-weight:bold;
     }
   </style>
 </head>
@@ -302,18 +329,38 @@
     </div>
   </div>
 
-  <!-- نافذة إنشاء غرفة -->
-  <div class="modal" id="roomModal" style="display:none;">
+  <!-- نافذة الغرف الخاصة -->
+  <div class="modal" id="privateRoomModal" style="display:none;">
     <div class="modal-box">
-      <h3>إنشاء غرفة جديدة</h3>
-      <p>اختر اسم الغرفة ونوعها:</p>
-      <input type="text" id="roomNameInput" placeholder="اسم الغرفة (مثال: غرفة الأصدقاء)">
-      <select id="roomTypeSelect">
-        <option value="open">مفتوحة (بدون رمز)</option>
-        <option value="closed">مغلقة (برمز سري)</option>
-      </select>
-      <input type="password" id="roomPassInput" placeholder="الرمز السري" style="display:none;">
-      <button onclick="createRoom()">إنشاء الغرفة</button>
+      <h3>غرف خاصة</h3>
+      <p>أنشئ غرفتك الخاصة أو ادخل غرفة برمز.</p>
+
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab-btn active" id="tabCreate"
+                onclick="setPrivateRoomMode('create')">إنشاء غرفة</button>
+        <button type="button" class="modal-tab-btn" id="tabJoin"
+                onclick="setPrivateRoomMode('join')">دخول غرفة</button>
+      </div>
+
+      <!-- إنشاء غرفة -->
+      <div id="privateCreateBox">
+        <input type="text" id="privateRoomName" placeholder="اسم الغرفة الخاصة (مثال: غرفة الأصدقاء)">
+        <select id="privateRoomType">
+          <option value="open">مفتوحة (بدون رمز)</option>
+          <option value="closed">مغلقة (برمز سري)</option>
+        </select>
+        <input type="password" id="privateRoomPass" placeholder="الرمز السري" style="display:none;">
+        <button onclick="createPrivateRoom()">إنشاء غرفتي الخاصة</button>
+      </div>
+
+      <!-- دخول غرفة -->
+      <div id="privateJoinBox" style="display:none;">
+        <input type="text" id="joinRoomCode" placeholder="رمز الغرفة (مثال: ABC123)">
+        <input type="password" id="joinRoomPass" placeholder="الرمز (إن وجِد)">
+        <button onclick="joinPrivateRoom()">دخول الغرفة</button>
+      </div>
+
+      <button style="margin-top:10px; background:#6b7280;" onclick="closePrivateRoomModal()">إغلاق</button>
     </div>
   </div>
 
@@ -323,24 +370,35 @@
         <i class="fa-solid fa-comments"></i>
         <div>
           <div class="header-title">شات زرزور</div>
-          <div class="header-sub">غرف عامة وسرّية – حذف تلقائي بعد 22 دقيقة</div>
+          <div class="header-sub">شات عام – شات بنات – شات تعارف – غرف خاصة</div>
         </div>
       </div>
-      <a class="support-btn" href="https://t.me/am_an12" target="_blank" rel="noopener">
-        <i class="fa-brands fa-telegram-plane"></i>
-        دعم تيليجرام
-      </a>
+      <div class="header-right">
+        <button class="lock-btn" type="button" onclick="openPrivateRoomModal()">
+          <i class="fa-solid fa-lock"></i>
+        </button>
+        <a class="support-btn" href="https://t.me/am_an12" target="_blank" rel="noopener">
+          <i class="fa-brands fa-telegram-plane"></i>
+          دعم
+        </a>
+      </div>
     </div>
 
-    <!-- شريط الغرف -->
-    <div class="rooms-bar">
-      <div class="rooms-top">
-        <div class="current-room-label" id="currentRoomLabel">الغرفة الحالية: الشات العام</div>
-        <button class="create-room-btn" onclick="openRoomModal()">
-          <i class="fa-solid fa-plus"></i> غرفة جديدة
-        </button>
-      </div>
-      <div class="rooms-list" id="roomsList"></div>
+    <!-- التبويبات الثابتة -->
+    <div class="rooms-tabs">
+      <button class="room-tab active" data-room="public">
+        <i class="fa-solid fa-globe"></i> شات عام
+      </button>
+      <button class="room-tab" data-room="girls">
+        <i class="fa-solid fa-venus"></i> شات بنات محترم
+      </button>
+      <button class="room-tab" data-room="dating">
+        <i class="fa-solid fa-heart"></i> شات تعارف محترم
+      </button>
+    </div>
+
+    <div class="current-room-label" id="currentRoomLabel">
+      الغرفة الحالية: شات عام
     </div>
 
     <!-- الرسائل -->
@@ -359,8 +417,10 @@
     </div>
 
     <div class="footer-note">
-      الرسائل والصور في كل غرفة لها وقت صلاحية 22 دقيقة، وبعدها يحاول النظام حذفها من قاعدة البيانات
-      بشكل تلقائي. للمشاريع الحساسة تحتاج حذف من السيرفر (Cloud Functions) أيضاً.
+      يمكنك اختيار الغرفة المناسبة لك، أو إنشاء غرفة خاصة برمز، وحظر المستخدمين المزعجين.
+      الهدف أن يكون الشات حر ومرن للمستخدم، مع احترام الخصوصية.
+      <br>
+      <a href="about.html">عن شات زرزور (معلومات وقواعد الاستخدام)</a>
     </div>
   </div>
 
@@ -384,22 +444,30 @@
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-    const ROOM_LIFETIME_MS = 22 * 60 * 1000; // 22 دقيقة
+    const ROOM_LIFETIME_MS = 22 * 60 * 1000; // 22 دقيقة (صلاحية الرسالة وغرف خاصة تجريبياً)
 
     let myName = "";
-    let currentRoomId = "public";
+    let currentRoomId = "public"; // public | girls | dating | private code
+    let currentRoomIsPrivate = false;
+    let currentPrivateRoomCode = null;
+    let currentPrivateRoomOwner = null;
+
     let unsubscribeMessages = null;
-    let unsubscribeRooms = null;
 
     const loginModal       = document.getElementById("loginModal");
-    const roomModal        = document.getElementById("roomModal");
+    const privateRoomModal = document.getElementById("privateRoomModal");
     const msgInput         = document.getElementById("msgInput");
     const messagesList     = document.getElementById("messagesList");
-    const roomsList        = document.getElementById("roomsList");
     const currentRoomLabel = document.getElementById("currentRoomLabel");
     const imageInput       = document.getElementById("imageInput");
+    const roomTabs         = document.querySelectorAll(".room-tab");
 
-    // دالة هاش للرمز السري (حتى لا نخزّنه نص عادي في قاعدة البيانات)
+    // بلوك محلي للمستخدمين في الشات العام وباقي الغرف
+    let blockedUsers = new Set();
+    // قائمة محلية للمستخدمين المحظورين من غرفة خاصة (لدى صاحب الغرفة)
+    let localRoomBannedUsers = new Set();
+
+    // ===== دوال مساعدة =====
     async function hashPasscode(pass) {
       const enc = new TextEncoder().encode(pass);
       const buf = await crypto.subtle.digest("SHA-256", enc);
@@ -407,66 +475,116 @@
       return arr.map(b => b.toString(16).padStart(2, "0")).join("");
     }
 
-    // دخول الشات
+    function generateRoomCode() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      let out = "";
+      for (let i = 0; i < 6; i++) {
+        out += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return out;
+    }
+
+    // ===== دخول الشات =====
     function enterChat() {
       const input = document.getElementById("usernameInput");
       const name = input.value.trim();
       if (!name) return;
       myName = name;
       loginModal.style.display = "none";
-
-      ensurePublicRoom().then(() => {
-        subscribeRooms();
-        switchRoom("public");
-      });
+      listenToMessages();
     }
 
     document.getElementById("usernameInput").addEventListener("keydown", (e) => {
       if (e.key === "Enter") enterChat();
     });
 
-    // تأكيد الغرفة العامة
-    async function ensurePublicRoom() {
-      const ref = db.collection("rooms").doc("public");
-      const snap = await ref.get();
-      if (!snap.exists) {
-        await ref.set({
-          name: "الشات العام",
-          isPrivate: false,
-          passHash: null,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          // الغرفة العامة بدون انتهاء صلاحية
-          expiresAt: null
-        });
+    // ===== التبويبات الثابتة =====
+    function switchRoom(roomId) {
+      currentRoomId = roomId;
+      currentRoomIsPrivate = false;
+      currentPrivateRoomCode = null;
+      currentPrivateRoomOwner = null;
+      localRoomBannedUsers = new Set();
+
+      roomTabs.forEach(tab => {
+        tab.classList.toggle("active", tab.dataset.room === roomId);
+      });
+
+      if (roomId === "public") {
+        currentRoomLabel.textContent = "الغرفة الحالية: شات عام";
+      } else if (roomId === "girls") {
+        currentRoomLabel.textContent = "الغرفة الحالية: شات بنات محترم";
+      } else if (roomId === "dating") {
+        currentRoomLabel.textContent = "الغرفة الحالية: شات تعارف محترم";
       }
+
+      listenToMessages();
     }
 
-    // فتح نافذة إنشاء غرفة
-    function openRoomModal() {
-      if (!myName) {
-        alert("أدخل إلى الشات أولاً.");
-        return;
-      }
-      document.getElementById("roomNameInput").value = "";
-      document.getElementById("roomTypeSelect").value = "open";
-      document.getElementById("roomPassInput").value = "";
-      document.getElementById("roomPassInput").style.display = "none";
-      roomModal.style.display = "flex";
-    }
-
-    document.getElementById("roomTypeSelect").addEventListener("change", (e) => {
-      const val = e.target.value;
-      document.getElementById("roomPassInput").style.display = (val === "closed") ? "block" : "none";
+    roomTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        if (!myName) {
+          alert("أدخل اسمك أولاً.");
+          return;
+        }
+        const roomId = tab.dataset.room;
+        if (roomId !== currentRoomId) {
+          switchRoom(roomId);
+        }
+      });
     });
 
-    // إنشاء غرفة جديدة
-    async function createRoom() {
-      const name = document.getElementById("roomNameInput").value.trim();
-      const type = document.getElementById("roomTypeSelect").value;
-      const pass = document.getElementById("roomPassInput").value.trim();
+    // ===== الغرف الخاصة =====
+    function openPrivateRoomModal() {
+      if (!myName) {
+        alert("أدخل اسمك أولاً.");
+        return;
+      }
+      privateRoomModal.style.display = "flex";
+      setPrivateRoomMode("create");
+    }
+
+    function closePrivateRoomModal() {
+      privateRoomModal.style.display = "none";
+    }
+
+    function setPrivateRoomMode(mode) {
+      const tabCreate = document.getElementById("tabCreate");
+      const tabJoin   = document.getElementById("tabJoin");
+      const boxCreate = document.getElementById("privateCreateBox");
+      const boxJoin   = document.getElementById("privateJoinBox");
+
+      if (mode === "create") {
+        tabCreate.classList.add("active");
+        tabJoin.classList.remove("active");
+        boxCreate.style.display = "block";
+        boxJoin.style.display = "none";
+      } else {
+        tabCreate.classList.remove("active");
+        tabJoin.classList.add("active");
+        boxCreate.style.display = "none";
+        boxJoin.style.display = "block";
+      }
+    }
+
+    document.getElementById("privateRoomType").addEventListener("change", (e) => {
+      const val = e.target.value;
+      const passInput = document.getElementById("privateRoomPass");
+      passInput.style.display = (val === "closed") ? "block" : "none";
+    });
+
+    async function createPrivateRoom() {
+      if (!myName) {
+        alert("أدخل اسمك أولاً.");
+        return;
+      }
+
+      const name = document.getElementById("privateRoomName").value.trim();
+      const type = document.getElementById("privateRoomType").value;
+      const pass = document.getElementById("privateRoomPass").value.trim();
 
       if (!name) {
-        alert("اكتب اسم الغرفة.");
+        alert("اكتب اسم الغرفة الخاصة.");
         return;
       }
       if (type === "closed" && !pass) {
@@ -475,121 +593,157 @@
       }
 
       try {
+        const now = Date.now();
+
+        // تحقق هل لديه غرفة خاصة فعّالة مسبقاً
+        const snap = await db.collection("privateRooms")
+          .where("ownerName", "==", myName)
+          .get();
+
+        let hasActive = false;
+        snap.forEach(doc => {
+          const data = doc.data();
+          if (data.expiresAt) {
+            const ex = data.expiresAt.toDate().getTime();
+            if (ex > now) hasActive = true;
+          }
+        });
+
+        if (hasActive) {
+          alert("لديك غرفة خاصة فعّالة حالياً. انتظر انتهاء وقتها ثم أنشئ غرفة جديدة.");
+          return;
+        }
+
+        const code = generateRoomCode();
         let passHash = null;
-        if (type === "closed") {
+        if (type === "closed" && pass) {
           passHash = await hashPasscode(pass);
         }
+        const expiresAt = new Date(now + ROOM_LIFETIME_MS);
 
-        const expiresAt = new Date(Date.now() + ROOM_LIFETIME_MS);
-
-        const ref = await db.collection("rooms").add({
+        await db.collection("privateRooms").doc(code).set({
+          code,
           name,
-          isPrivate: type === "closed",
+          ownerName: myName,
+          isLocked: type === "closed",
           passHash,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          expiresAt: expiresAt
+          expiresAt: expiresAt,
+          bannedUsers: []
         });
-        roomModal.style.display = "none";
-        switchRoom(ref.id);
+
+        currentRoomId = code;
+        currentRoomIsPrivate = true;
+        currentPrivateRoomCode = code;
+        currentPrivateRoomOwner = myName;
+        localRoomBannedUsers = new Set();
+
+        currentRoomLabel.textContent = "الغرفة الحالية: غرفتي الخاصة - " + name;
+        closePrivateRoomModal();
+        listenToMessages();
+
+        alert("تم إنشاء غرفتك الخاصة.\nرمز الغرفة: " + code + "\nشارك الرمز مع أصدقائك.");
+
       } catch (err) {
-        console.error("خطأ في إنشاء الغرفة:", err);
-        alert("حصل خطأ في إنشاء الغرفة.");
+        console.error("خطأ في إنشاء الغرفة الخاصة:", err);
+        alert("حصل خطأ في إنشاء الغرفة الخاصة.");
       }
     }
 
-    // الاشتراك في قائمة الغرف
-    function subscribeRooms() {
-      if (unsubscribeRooms) unsubscribeRooms();
-      unsubscribeRooms = db.collection("rooms")
-        .orderBy("createdAt", "desc")
-        .onSnapshot((snapshot) => {
-          roomsList.innerHTML = "";
-          const now = Date.now();
+    async function joinPrivateRoom() {
+      if (!myName) {
+        alert("أدخل اسمك أولاً.");
+        return;
+      }
 
-          snapshot.forEach((doc) => {
-            const data = doc.data();
+      let code = document.getElementById("joinRoomCode").value.trim();
+      const pass = document.getElementById("joinRoomPass").value.trim();
 
-            // التحقق من انتهاء صلاحية الغرفة (ما عدا العامة)
-            if (doc.id !== "public" && data.expiresAt) {
-              const expiresAt = data.expiresAt.toDate();
-              if (now > expiresAt.getTime()) {
-                doc.ref.delete().catch(() => {});
-                return;
-              }
-            }
+      if (!code) {
+        alert("اكتب رمز الغرفة.");
+        return;
+      }
+      code = code.toUpperCase();
 
-            const pill = document.createElement("button");
-            pill.type = "button";
-            pill.className = "room-pill";
-            if (doc.id === currentRoomId) pill.classList.add("active");
-
-            const icon = document.createElement("i");
-            icon.className = data.isPrivate ? "fa-solid fa-lock" : "fa-solid fa-door-open";
-            pill.appendChild(icon);
-
-            const span = document.createElement("span");
-            span.textContent = data.name || "غرفة بدون اسم";
-            pill.appendChild(span);
-
-            pill.addEventListener("click", () => {
-              if (doc.id === currentRoomId) return;
-              joinRoom(doc.id, data);
-            });
-
-            roomsList.appendChild(pill);
-
-            // تحديث اسم الغرفة الحالية في العنوان
-            if (doc.id === currentRoomId) {
-              currentRoomLabel.textContent =
-                (doc.id === "public")
-                  ? "الغرفة الحالية: الشات العام"
-                  : "الغرفة الحالية: " + (data.name || "غرفة بدون اسم");
-            }
-          });
-        }, (err) => {
-          console.error("خطأ في جلب الغرف:", err);
-        });
-    }
-
-    // الانضمام لغرفة
-    async function joinRoom(roomId, roomData) {
-      // تحقق من انتهاء الصلاحية
-      if (roomId !== "public" && roomData.expiresAt) {
-        const expiresAt = roomData.expiresAt.toDate();
-        if (Date.now() > expiresAt.getTime()) {
-          alert("انتهت صلاحية هذه الغرفة (أكثر من 22 دقيقة).");
+      try {
+        const doc = await db.collection("privateRooms").doc(code).get();
+        if (!doc.exists) {
+          alert("الغرفة غير موجودة.");
           return;
         }
-      }
+        const data = doc.data();
+        const now = Date.now();
 
-      if (roomData.isPrivate && roomId !== "public") {
-        const code = prompt("هذه الغرفة مغلقة. أدخل الرمز السري:");
-        if (code === null) return;
-        const codeHash = await hashPasscode(code);
-        if (!roomData.passHash || codeHash !== roomData.passHash) {
-          alert("الرمز غير صحيح.");
+        if (data.expiresAt && data.expiresAt.toDate().getTime() < now) {
+          alert("انتهى وقت هذه الغرفة.");
           return;
         }
+
+        if (data.isLocked) {
+          if (!pass) {
+            alert("هذه الغرفة مغلقة. أدخل الرمز السري.");
+            return;
+          }
+          const passHash = await hashPasscode(pass);
+          if (passHash !== data.passHash) {
+            alert("الرمز السري غير صحيح.");
+            return;
+          }
+        }
+
+        if (Array.isArray(data.bannedUsers) && data.bannedUsers.includes(myName)) {
+          alert("تم حظرك من هذه الغرفة.");
+          return;
+        }
+
+        currentRoomId = code;
+        currentRoomIsPrivate = true;
+        currentPrivateRoomCode = code;
+        currentPrivateRoomOwner = data.ownerName || null;
+        localRoomBannedUsers = new Set(data.bannedUsers || []);
+
+        currentRoomLabel.textContent = "الغرفة الحالية: " + (data.name || "غرفة خاصة");
+        closePrivateRoomModal();
+        listenToMessages();
+
+      } catch (err) {
+        console.error("خطأ في دخول الغرفة الخاصة:", err);
+        alert("حصل خطأ في دخول الغرفة الخاصة.");
       }
-      switchRoom(roomId);
     }
 
-    // تبديل الغرفة الحالية
-    function switchRoom(roomId) {
-      currentRoomId = roomId;
-      // سيتم تحديث الاسم الحقيقي من subscribeRooms
+    async function banUserInCurrentRoom(username) {
+      if (!currentRoomIsPrivate || !currentPrivateRoomCode) return;
+      if (!myName || myName !== currentPrivateRoomOwner) return;
+      if (!username || username === myName) return;
+
+      try {
+        localRoomBannedUsers.add(username);
+        await db.collection("privateRooms")
+          .doc(currentPrivateRoomCode)
+          .set({
+            bannedUsers: firebase.firestore.FieldValue.arrayUnion(username)
+          }, { merge: true });
+
+        listenToMessages(); // إعادة تحميل الرسائل للتصفية
+      } catch (err) {
+        console.error("خطأ في طرد المستخدم من الغرفة:", err);
+      }
+    }
+
+    function blockUser(username) {
+      if (!username || username === myName) return;
+      blockedUsers.add(username);
       listenToMessages();
-      subscribeRooms();
     }
 
-    // الاستماع لرسائل الغرفة
+    // ===== الرسائل =====
     function listenToMessages() {
       if (unsubscribeMessages) unsubscribeMessages();
       messagesList.innerHTML = "";
 
       unsubscribeMessages = db.collection("messages")
         .where("roomId", "==", currentRoomId)
-        .orderBy("timestamp", "asc")
         .onSnapshot((snapshot) => {
           messagesList.innerHTML = "";
           const now = Date.now();
@@ -597,7 +751,7 @@
           snapshot.forEach((doc) => {
             const msg = doc.data();
 
-            // تحقق من انتهاء صلاحية الرسالة
+            // حذف الرسائل المنتهية الصلاحية
             let expired = false;
             if (msg.expiresAt) {
               const expiresAt = msg.expiresAt.toDate();
@@ -611,6 +765,23 @@
 
             if (!msg.timestamp) return;
             const ts = msg.timestamp.toDate();
+
+            const sender = msg.sender || "";
+
+            // بلوك محلي في أي غرفة
+            if (sender && blockedUsers.has(sender)) {
+              return;
+            }
+
+            // صاحب الغرفة الخاصة لا يرى المحظورين من غرفته
+            if (currentRoomIsPrivate &&
+                myName &&
+                myName === currentPrivateRoomOwner &&
+                sender &&
+                localRoomBannedUsers.has(sender)) {
+              return;
+            }
+
             renderMessage(msg, ts);
           });
 
@@ -622,11 +793,15 @@
 
     function renderMessage(msg, ts) {
       const div = document.createElement("div");
-      const isMine = msg.sender === myName;
+      const sender = msg.sender || "";
+      const isMine = sender === myName;
       div.className = "message " + (isMine ? "mine" : "others");
 
-      if (!isMine && msg.sender) {
-        div.innerHTML = `<span class="sender-name">${msg.sender}</span>`;
+      if (!isMine && sender) {
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "sender-name";
+        nameSpan.textContent = sender;
+        div.appendChild(nameSpan);
       }
 
       if (msg.text) {
@@ -640,6 +815,27 @@
         img.src = msg.imageUrl;
         img.alt = "صورة مرسلة";
         div.appendChild(img);
+      }
+
+      // زر حظر / طرد
+      if (!isMine && sender) {
+        const actionBtn = document.createElement("button");
+        actionBtn.style.border = "none";
+        actionBtn.style.background = "transparent";
+        actionBtn.style.color = "#b91c1c";
+        actionBtn.style.cursor = "pointer";
+        actionBtn.style.fontSize = "0.7rem";
+        actionBtn.style.marginTop = "4px";
+        actionBtn.style.display = "block";
+
+        if (currentRoomIsPrivate && myName && myName === currentPrivateRoomOwner) {
+          actionBtn.textContent = "طرد المستخدم";
+          actionBtn.onclick = () => banUserInCurrentRoom(sender);
+        } else {
+          actionBtn.textContent = "حظر المستخدم";
+          actionBtn.onclick = () => blockUser(sender);
+        }
+        div.appendChild(actionBtn);
       }
 
       const timeDiv = document.createElement("div");
@@ -657,9 +853,28 @@
     }
 
     // إرسال نص
-    function sendMessage() {
+    async function sendMessage() {
       const text = msgInput.value.trim();
       if (!text || !myName || !currentRoomId) return;
+
+      // في الغرفة الخاصة: تحقق إن الشخص مو محظور
+      if (currentRoomIsPrivate && currentPrivateRoomCode) {
+        try {
+          const doc = await db.collection("privateRooms")
+            .doc(currentPrivateRoomCode)
+            .get();
+          if (doc.exists) {
+            const data = doc.data();
+            if (Array.isArray(data.bannedUsers) &&
+                data.bannedUsers.includes(myName)) {
+              alert("تم حظرك من هذه الغرفة.");
+              return;
+            }
+          }
+        } catch (err) {
+          console.error("خطأ في التحقق من الحظر:", err);
+        }
+      }
 
       const expiresAt = new Date(Date.now() + ROOM_LIFETIME_MS);
 
